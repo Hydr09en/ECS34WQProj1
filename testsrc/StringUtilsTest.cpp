@@ -2,7 +2,14 @@
 #include "StringUtils.h"
 
 TEST(StringUtilsTest, SliceTest){
-    
+    std::string baseString = "Hello!";
+    EXPECT_EQ(StringUtils::Slice(baseString,0,5),"Hello");
+    EXPECT_EQ(StringUtils::Slice(baseString,0,4),"Hell");
+    EXPECT_EQ(StringUtils::Slice(baseString,1,4),"ell");
+    EXPECT_EQ(StringUtils::Slice(baseString,1),"ello!");
+    EXPECT_EQ(StringUtils::Slice(baseString,-1),"!");
+    EXPECT_EQ(StringUtils::Slice(baseString,-1,-2),"");
+    EXPECT_EQ(StringUtils::Slice(baseString,-2,-1),"o");
 }
 
 TEST(StringUtilsTest, Capitalize){
