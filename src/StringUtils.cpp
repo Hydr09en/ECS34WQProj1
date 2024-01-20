@@ -19,33 +19,53 @@ std::string Slice(const std::string &str, ssize_t start, ssize_t end) noexcept{
 }
 
 std::string Capitalize(const std::string &str) noexcept{
-    // Replace code here
-    return "";
+    auto Copy = str;
+
+    Copy[0]=toupper(str[0]);
+    for(size_t index=1;index<Copy.length();index++){
+        Copy[index]=tolower(Copy[index]);
+    }
+    return Copy;
 }
 
 std::string Upper(const std::string &str) noexcept{
-    // Replace code here
-    return "";
+    auto Copy = str;
+
+    for(size_t index=0;index<Copy.length();index++){
+        Copy[index]=toupper(Copy[index]);
+    }
+
+    return Copy;
 }
 
 std::string Lower(const std::string &str) noexcept{
-    // Replace code here
-    return "";
+    auto Copy = str;
+
+    for(size_t index=0;index<Copy.length();index++){
+        Copy[index]=tolower(Copy[index]);
+    }
+
+    return Copy;
 }
 
 std::string LStrip(const std::string &str) noexcept{
-    // Replace code here
-    return "";
+    size_t counter=0;
+    while(str[counter]==' '){
+        counter++;
+    }
+    return str.substr(counter,str.length());
 }
 
 std::string RStrip(const std::string &str) noexcept{
-    // Replace code here
-    return "";
+    size_t counter=str.length()-1;
+    while(str[counter]==' '){
+        counter--;
+    }
+    return StringUtils::Slice(str,0,counter+1);
 }
 
 std::string Strip(const std::string &str) noexcept{
-    // Replace code here
-    return "";
+    return LStrip(RStrip(str));
 }
 
 std::string Center(const std::string &str, int width, char fill) noexcept{
