@@ -99,13 +99,26 @@ TEST(StringUtilsTest, Split){
 }
 
 TEST(StringUtilsTest, Join){
-    
+    std::vector<std::string> a= {"Hello","World!"};
+    EXPECT_EQ(StringUtils::Join("hello",a),"helloHelloWorld!");
+    EXPECT_EQ(StringUtils::Join("",a),"HelloWorld!");
+    a={"","1","2","3","4","5","6","7"};
+    EXPECT_EQ(StringUtils::Join("0",a),"01234567");
+    a={};
+    EXPECT_EQ(StringUtils::Join("Hello-World!",a),"Hello-World!");
 }
 
 TEST(StringUtilsTest, ExpandTabs){
-    
+    EXPECT_EQ(StringUtils::ExpandTabs("\t1\t11\t",1)," 1 11 ");
+    EXPECT_EQ(StringUtils::ExpandTabs("\t1\t11\t",2),"  1  11  ");
+    EXPECT_EQ(StringUtils::ExpandTabs("\t1\t11\t",4),"    1    11    ");
 }
 
 TEST(StringUtilsTest, EditDistance){
-    
+    EXPECT_EQ(StringUtils::EditDistance("kitten","sitting"),3);
+    EXPECT_EQ(StringUtils::EditDistance("kitten","Sitting"),3);
+    EXPECT_EQ(StringUtils::EditDistance("kitten","sItting"),4);
+    EXPECT_EQ(StringUtils::EditDistance("kitten","sItting",true),3);
+    EXPECT_EQ(StringUtils::EditDistance("kitten","sIttin",true),2);
+    EXPECT_EQ(StringUtils::EditDistance("kitten","kitten"),0);
 }

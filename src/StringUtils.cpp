@@ -99,8 +99,7 @@ std::string Replace(const std::string &str, const std::string &old, const std::s
     auto oldLen=old.length();
     for(size_t i=0;i<Copy.length();i++){
         if(Copy.substr(i,oldLen)==old){
-            Copy.erase(i,oldLen);
-            Copy.insert(i,rep);
+            Copy.replace(i,oldLen,rep);
         }
     }
     return Copy;
@@ -128,17 +127,49 @@ std::vector< std::string > Split(const std::string &str, const std::string &splt
 }
 
 std::string Join(const std::string &str, const std::vector< std::string > &vect) noexcept{    
-    return "";
+    auto Copy = str;
+
+    for(int i=0; i<vect.size();i++){
+        Copy+=vect.at(i);
+    }
+   
+    return Copy;
 }
 
 std::string ExpandTabs(const std::string &str, int tabsize) noexcept{
-    // Replace code here
-    return "";
+    auto Copy = str;
+
+    std::string spaceString (tabsize,' ');
+    for(size_t i=0;i<Copy.length();i++){
+        if(Copy.substr(i,1)=="\t"){
+            Copy.replace(i,1,spaceString);
+        }
+    }
+    return Copy;
 }
 
 int EditDistance(const std::string &left, const std::string &right, bool ignorecase) noexcept{
-    // Replace code here
-    return 0;
+    auto copyLeft = left;
+    auto copyRight = right;
+    if(ignorecase){
+        copyLeft=Lower(copyLeft);
+        copyRight=Lower(copyRight);
+    }
+    
+    if(copyLeft=="")
+        return copyRight.length();
+    if(copyRight=="")
+        return copyLeft.length();
+    
+    if(copyLeft.at(0)==copyRight.at(0))
+        return EditDistance(copyLeft.substr(1),copyRight.substr(1));
+
+    int minDistance = 2147483647;
+    minDistance = std::min(minDistance, EditDistance(copyLeft, copyRight.substr(1)));
+    minDistance = std::min(minDistance, EditDistance(copyLeft.substr(1), copyRight));
+    minDistance = std::min(minDistance, EditDistance(copyLeft.substr(1), copyRight.substr(1)));
+
+    return 1+minDistance;
 }
 
 };
