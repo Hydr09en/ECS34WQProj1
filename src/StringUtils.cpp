@@ -69,32 +69,65 @@ std::string Strip(const std::string &str) noexcept{
 }
 
 std::string Center(const std::string &str, int width, char fill) noexcept{
-    // Replace code here
-    return "";
+    size_t leftInsert = (width-str.length())/2;
+
+    return LJust(RJust(str,str.length()+leftInsert,fill),width,fill);
 }
 
 std::string LJust(const std::string &str, int width, char fill) noexcept{
-    // Replace code here
-    return "";
+    auto Copy = str;
+    
+    for(int i = 0;i < width - str.length();i++){
+        Copy=Copy+fill;
+    }
+
+    return Copy;
 }
 
 std::string RJust(const std::string &str, int width, char fill) noexcept{
-    // Replace code here
-    return "";
+    auto Copy = str;
+    
+    for(int i = 0;i < width - str.length();i++){
+        Copy=fill+Copy;
+    }
+
+    return Copy;
 }
 
 std::string Replace(const std::string &str, const std::string &old, const std::string &rep) noexcept{
-    // Replace code here
-    return "";
+    auto Copy = str;
+    auto oldLen=old.length();
+    for(size_t i=0;i<Copy.length();i++){
+        if(Copy.substr(i,oldLen)==old){
+            Copy.erase(i,oldLen);
+            Copy.insert(i,rep);
+        }
+    }
+    return Copy;
 }
 
 std::vector< std::string > Split(const std::string &str, const std::string &splt) noexcept{
-    // Replace code here
-    return {};
+    size_t pos=0;
+    size_t found;
+    std::vector< std::string > vect={};
+
+    auto spliter=splt;
+
+    if(spliter==""){
+        spliter=" ";
+    }
+    
+    while ((found = str.find(spliter, pos)) != std::string::npos) {
+        vect.push_back(str.substr(pos, found - pos));
+        pos = found + spliter.length();
+    }
+
+    vect.push_back(str.substr(pos)); 
+
+    return vect;
 }
 
-std::string Join(const std::string &str, const std::vector< std::string > &vect) noexcept{
-    // Replace code here
+std::string Join(const std::string &str, const std::vector< std::string > &vect) noexcept{    
     return "";
 }
 
