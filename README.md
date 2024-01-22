@@ -11,4 +11,4 @@ None
 [Recursive algorithom of edit distance]https://en.wikipedia.org/wiki/Levenshtein_distance
 
 ## Generative AI use
-I do not use generative AI in this project.
+I do not use generative AI in this project that need to be report in this file.
